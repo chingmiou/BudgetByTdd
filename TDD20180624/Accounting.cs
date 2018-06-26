@@ -11,7 +11,7 @@ namespace BudgetByTdd
             _budgetRepository = budgetRepository;
         }
 
-        public decimal GetTotalAmount(DateTime start, DateTime end)
+        public decimal TotalAmount(DateTime start, DateTime end)
         {
             return 0;
         }
