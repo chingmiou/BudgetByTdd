@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using System;
+using System.Collections.Generic;
 
 namespace BudgetByTdd
 {
@@ -19,10 +20,21 @@ namespace BudgetByTdd
         [TestMethod]
         public void no_budgets()
         {
-            AmountShouldBe("20180601", "20180601", 0m);
+            _budgetRepository.GetAll().Returns(new List<Budget>());
+            AmountShouldBe(0m, "20180601", "20180601");
         }
 
-        private void AmountShouldBe(string startTime, string endTime, decimal expected)
+        [TestMethod]
+        public void period_inside_budget_month()
+        {
+            _budgetRepository.GetAll().Returns(new List<Budget>
+            {
+                new Budget{YearMonth = "201806", Amount = 30}
+            });
+            AmountShouldBe(1m, "20180601", "20180601");
+        }
+
+        private void AmountShouldBe(decimal expected, string startTime, string endTime)
         {
             var start = DateTime.ParseExact(startTime, "yyyyMMdd", null);
             var end = DateTime.ParseExact(endTime, "yyyyMMdd", null);
