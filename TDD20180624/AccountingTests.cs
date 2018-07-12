@@ -32,6 +32,13 @@ namespace BudgetByTdd
             AmountShouldBe(1m, "20180601", "20180601");
         }
 
+        [TestMethod]
+        public void no_overlap_period_before_budget_firsday()
+        {
+            GivenBudgets(new Budget { YearMonth = "201807", Amount = 31 });
+            AmountShouldBe(0m, "20180601", "20180601");
+        }
+
         private void GivenBudgets(params Budget[] budgets)
         {
             _budgetRepository.GetAll().Returns(budgets.ToList());

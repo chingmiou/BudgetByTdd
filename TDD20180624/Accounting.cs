@@ -33,10 +33,13 @@ namespace BudgetByTdd
         public decimal TotalAmount(DateTime start, DateTime end)
         {
             var budgets = _budgetRepository.GetAll();
-
+            var period = new Period(start, end);
             if (budgets.Any())
             {
-                var period = new Period(start, end);
+                if (period.End < budgets[0].FirstDay)
+                {
+                    return 0;
+                }
                 return period.Days();
             }
 
