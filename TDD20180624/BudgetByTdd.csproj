@@ -66,6 +66,7 @@
     <Compile Include="AccountingTests.cs" />
     <Compile Include="Budget.cs" />
     <Compile Include="IBudgetRepository.cs" />
+    <Compile Include="Period.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
