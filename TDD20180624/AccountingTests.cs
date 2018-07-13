@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace BudgetByTdd
@@ -65,6 +64,15 @@ namespace BudgetByTdd
         {
             GivenBudgets(new Budget { YearMonth = "201805", Amount = 62 });
             AmountShouldBe(6m, "20180501", "20180503");
+        }
+
+        [TestMethod]
+        public void multiple_budgets()
+        {
+            GivenBudgets(
+                new Budget { YearMonth = "201805", Amount = 31 },
+                new Budget { YearMonth = "201806", Amount = 300 });
+            AmountShouldBe(27m, "20180525", "20180602");
         }
 
         [ExpectedException(typeof(ArgumentException))]
