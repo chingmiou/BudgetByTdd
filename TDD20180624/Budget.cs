@@ -7,7 +7,7 @@ namespace BudgetByTdd
         public string YearMonth { get; set; }
         public int Amount { get; set; }
 
-        public DateTime FirstDay
+        private DateTime FirstDay
         {
             get
             {
@@ -15,7 +15,7 @@ namespace BudgetByTdd
             }
         }
 
-        public DateTime LastDay
+        private DateTime LastDay
         {
             get
             {
@@ -23,7 +23,7 @@ namespace BudgetByTdd
             }
         }
 
-        public int DaysInMonth
+        private int DaysInMonth
         {
             get
             {
@@ -31,19 +31,19 @@ namespace BudgetByTdd
             }
         }
 
-        public int DailyAmount()
+        private int DailyAmount()
         {
             return Amount / DaysInMonth;
         }
 
-        public Period PeriodFromBudget()
+        private Period GetPeriod()
         {
             return new Period(FirstDay, LastDay);
         }
 
         public decimal OverlapAmount(Period period)
         {
-            return period.OverlappingDays(PeriodFromBudget()) * DailyAmount();
+            return period.OverlappingDays(GetPeriod()) * DailyAmount();
         }
     }
 }
