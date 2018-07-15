@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BudgetByTdd
@@ -18,6 +19,16 @@ namespace BudgetByTdd
         {
             return (End - Start).Days + 1;
         }
+
+        public decimal OverlappingDays(Budget budget)
+        {
+            if (End < budget.FirstDay)
+            {
+                return 0;
+            }
+
+            return Days();
+        }
     }
 
     public class Accounting
@@ -35,12 +46,7 @@ namespace BudgetByTdd
             var period = new Period(start, end);
             if (budgets.Any())
             {
-                if (period.End < budgets[0].FirstDay)
-                {
-                    return 0;
-                }
-                var days = period.Days();
-                return days;
+                return period.OverlappingDays(budgets[0]);
             }
             return 0;
         }
