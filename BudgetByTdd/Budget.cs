@@ -27,5 +27,10 @@ namespace BudgetByTdd
                 return DateTime.DaysInMonth(FirstDay.Year, FirstDay.Month);
             }
         }
+
+        public int DailyAmout()
+        {
+            return Amount / DaysInMonth;
+        }
     }
 }
