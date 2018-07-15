@@ -20,7 +20,7 @@ namespace BudgetByTdd
             {
                 var budget = budgets[0];
 
-                return period.OverlappingDays(budget) * budget.DailyAmout();
+                return period.OverlappingDays(new Period(budget.FirstDay, budget.LastDay)) * budget.DailyAmout();
             }
             return 0;
         }

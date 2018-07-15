@@ -17,22 +17,22 @@ namespace BudgetByTdd
         public DateTime Start { get; private set; }
         public DateTime End { get; private set; }
 
-        public decimal OverlappingDays(Budget budget)
+        public decimal OverlappingDays(Period overPeriod)
         {
-            if (HasNoOverlap(budget))
+            if (HasNoOverlap(overPeriod))
             {
                 return 0;
             }
 
-            var overlapStart = Start > budget.FirstDay ? Start : budget.FirstDay;
-            var overlapEnd = End < budget.LastDay ? End : budget.LastDay;
+            var overlapStart = Start > overPeriod.Start ? Start : overPeriod.Start;
+            var overlapEnd = End < overPeriod.End ? End : overPeriod.End;
 
             return (overlapEnd - overlapStart).Days + 1;
         }
 
-        private bool HasNoOverlap(Budget budget)
+        private bool HasNoOverlap(Period overPeriod)
         {
-            return End < budget.FirstDay || Start > budget.LastDay;
+            return End < overPeriod.Start || Start > overPeriod.End;
         }
     }
 }
